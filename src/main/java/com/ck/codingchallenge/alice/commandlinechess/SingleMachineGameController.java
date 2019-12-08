@@ -39,6 +39,11 @@ public class SingleMachineGameController implements ApplicationRunner {
                 uiInterface.drawBoard();
                 continue;
             }
+            if(nextInput.equalsIgnoreCase("h")){
+                uiInterface.drawBoard();
+                showHelpText();
+                continue;
+            }
             String[] cells = nextInput.toUpperCase().split("-");
 
             if(cells.length!=2){
@@ -69,6 +74,13 @@ public class SingleMachineGameController implements ApplicationRunner {
             showResult(result);
 
         }
+    }
+
+    private void showHelpText() {
+        System.out.println("Provide move as fromCell-toCell. e.g. d2-d4, g1-h3");
+        System.out.println("Type 'reset' to reset the game.");
+        System.out.println("Press 'q' to quit the game.");
+        System.out.println("");
     }
 
     private String getNextInput() throws IOException {
