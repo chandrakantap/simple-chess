@@ -75,7 +75,7 @@ public class SingleMachineGameController implements ApplicationRunner {
         if(this.reader==null){
             this.reader = new BufferedReader(new InputStreamReader(System.in));
         }
-        System.out.print("Next move:> ");
+        System.out.print(board.getCurrentPlayer().name()+" player's move:> ");
         return this.reader.readLine().trim();
     }
 

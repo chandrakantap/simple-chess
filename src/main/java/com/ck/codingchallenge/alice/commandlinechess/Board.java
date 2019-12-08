@@ -99,4 +99,8 @@ public class Board{
     public Piece getCellPiece(BoardCell cell){
         return piecePositions.get(cell);
     }
+
+    public List<Piece> getDeadPieces() {
+        return deadPieces;
+    }
 }

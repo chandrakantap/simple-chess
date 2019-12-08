@@ -3,6 +3,8 @@ package com.ck.codingchallenge.alice.commandlinechess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Iterator;
+
 @Component
 public class UIInterface {
     private Board board;
@@ -24,18 +26,26 @@ public class UIInterface {
     }
 
     public void drawBoard(){
+        final Iterator<Piece> deadPieceIterator =  board.getDeadPieces().iterator();
+
+
         clearConsole();
-        System.out.println("  ╔════════════════════════╗");
-        printRow(8);
-        printRow(7);
-        printRow(6);
-        printRow(5);
-        printRow(4);
-        printRow(3);
-        printRow(2);
-        printRow(1);
-        System.out.println("  ╚════════════════════════╝");
+        System.out.println("         Simple Chess");
+        System.out.println("");
         System.out.println("    a  b  c  d  e  f  g  h");
+        System.out.println("  ╔════════════════════════╗    ╔═════════╗");
+        printRow(8,deadPieceIterator);
+        printRow(7,deadPieceIterator);
+        printRow(6,deadPieceIterator);
+        printRow(5,deadPieceIterator);
+        printRow(4,deadPieceIterator);
+        printRow(3,deadPieceIterator);
+        printRow(2,deadPieceIterator);
+        printRow(1,deadPieceIterator);
+        System.out.println("  ╚════════════════════════╝    ╚═════════╝");
+        System.out.println("    a  b  c  d  e  f  g  h");
+        System.out.println("");
+        System.out.println("press 'h' for help");
     }
 
     private void clearConsole(){
@@ -43,7 +53,7 @@ public class UIInterface {
         System.out.flush();
     }
 
-    private void printRow(int rowNum){
+    private void printRow(int rowNum,Iterator<Piece> deadPieceIterator){
         StringBuilder rowStringBuilder = new StringBuilder().append(rowNum).append(" ║ ");
         BoardCell[] row = orderedCells[8-rowNum];
         for(int col=0;col<8;col++){
@@ -55,6 +65,11 @@ public class UIInterface {
                 rowStringBuilder.append(col==7?" ":"  ");
             }
         }
+        rowStringBuilder.append("║ ").append(rowNum).append("  ║ ");
+        rowStringBuilder.append(deadPieceIterator.hasNext()?deadPieceIterator.next().getAsciiCode():" ").append(" ");
+        rowStringBuilder.append(deadPieceIterator.hasNext()?deadPieceIterator.next().getAsciiCode():" ").append(" ");
+        rowStringBuilder.append(deadPieceIterator.hasNext()?deadPieceIterator.next().getAsciiCode():" ").append(" ");
+        rowStringBuilder.append(deadPieceIterator.hasNext()?deadPieceIterator.next().getAsciiCode():" ").append(" ");
         rowStringBuilder.append("║");
         System.out.println(rowStringBuilder.toString());
     }
