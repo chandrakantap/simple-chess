@@ -9,11 +9,11 @@ import org.springframework.stereotype.Component;
 @Component
 class PawnMoveValidator {
 
-    MoveResult validateBlackPawnMove(BoardCell fromCell, BoardCell toCell, Board board) {
+    MoveResult validateWhitePawnMove(BoardCell fromCell, BoardCell toCell, Board board) {
         final Piece pieceOnToCell = board.getCellPiece(toCell);
 
         if(
-                fromCell.getRow()==7 && fromCell.getRow()- toCell.getRow() <=2 && pieceOnToCell==null ||
+                fromCell.getRow()==6 && fromCell.getRow()- toCell.getRow() <=2 && pieceOnToCell==null ||
                 fromCell.getRow()- toCell.getRow() == 1 && fromCell.getColumn()==toCell.getColumn() && pieceOnToCell==null ||
                 fromCell.getRow()- toCell.getRow() == 1 && Math.abs(fromCell.getColumn()-toCell.getColumn())==1 && pieceOnToCell!=null && !pieceOnToCell.getPlayer().equals(board.getCurrentPlayer())
         ){
@@ -23,10 +23,10 @@ class PawnMoveValidator {
         return MoveResult.invalidMove();
     }
 
-    public MoveResult validateWhitePawnMove(BoardCell fromCell, BoardCell toCell, Board board) {
+    public MoveResult validateBlackPawnMove(BoardCell fromCell, BoardCell toCell, Board board) {
         final Piece pieceOnToCell = board.getCellPiece(toCell);
 
-        if(fromCell.getRow()==2 && toCell.getRow()- fromCell.getRow() <=2 && pieceOnToCell==null ||
+        if(fromCell.getRow()==1 && toCell.getRow()- fromCell.getRow() <=2 && pieceOnToCell==null ||
                         toCell.getRow()- fromCell.getRow() == 1 && fromCell.getColumn()==toCell.getColumn() && pieceOnToCell==null ||
                         toCell.getRow()- fromCell.getRow() == 1 && Math.abs(fromCell.getColumn()-toCell.getColumn())==1 && pieceOnToCell!=null && !pieceOnToCell.getPlayer().equals(board.getCurrentPlayer())
         ){

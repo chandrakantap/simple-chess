@@ -37,6 +37,6 @@ public class MoveResult {
     }
 
     public enum STATUS{
-        VALID,INVALID
+        VALID,INVALID,CHECK,CHECKMATE
     }
 }
