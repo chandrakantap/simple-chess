@@ -83,6 +83,12 @@ public class Board{
         currentPlayer = Player.WHITE;
     }
 
+    /**
+     * Validates the move, updates piece positions and switch Current Player
+     * @param fromCell
+     * @param toCell
+     * @return
+     */
     public MoveResult move(BoardCell fromCell, BoardCell toCell){
         final MoveResult moveResult = moveValidator.validateMove(fromCell,toCell,this);
 

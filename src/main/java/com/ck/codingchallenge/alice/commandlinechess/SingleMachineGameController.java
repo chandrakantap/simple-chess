@@ -22,6 +22,11 @@ public class SingleMachineGameController implements ApplicationRunner {
         this.uiInterface=uiInterface;
     }
 
+    /**
+     * Starts the Game, Parse nextMove and call move on Board
+     * @param args
+     * @throws Exception
+     */
     @Override
     public void run(ApplicationArguments args) throws Exception {
         board.startNewGame();
@@ -65,7 +70,7 @@ public class SingleMachineGameController implements ApplicationRunner {
             try{
                 toCell = BoardCell.valueOf(cells[1].trim());
             }catch (IllegalArgumentException ex){
-                showResult(MoveResult.invalidMove("Invalid cell provided."));
+                showResult(MoveResult.invalidMove(cells[1].trim()+" is not a valid cell."));
                 continue;
             }
 
