@@ -1,5 +1,5 @@
 ## Simple Chess
-![alt](https://bitbucket.org/chandrakantap/simple-chess/src/master/Screenshot.png)
+![alt](./Screenshot.png)
 ### System Requirement
 
 - Java 8
