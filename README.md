@@ -1,5 +1,5 @@
 ## Simple Chess
-[screenShoot]
+![alt](https://bitbucket.org/chandrakantap/simple-chess/src/master/Screenshot.png)
 ### System Requirement
 
 - Java 8
@@ -26,6 +26,3 @@ This project is build using SpringBoot and implements `ApplicationRunner` to sta
 - Display UI when in check.
 - Movement validator when in Checkmate.
 - Display UI when in Checkmate.
-
-
-[screenShoot]: 
