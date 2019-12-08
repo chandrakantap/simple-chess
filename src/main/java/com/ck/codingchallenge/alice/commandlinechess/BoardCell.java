@@ -62,4 +62,9 @@ public enum BoardCell {
         return Math.abs(this.getColumn()-cell.getColumn()) == Math.abs(this.getRow()-cell.getRow());
     }
 
+    public boolean isOnGallopPosition(BoardCell cell){
+        return Math.abs(this.getColumn()-cell.getColumn())==2 && Math.abs(this.getRow()-cell.getRow())==1 ||
+                Math.abs(this.getColumn()-cell.getColumn())==1 && Math.abs(this.getRow()-cell.getRow())==2 ;
+    }
+
 }
