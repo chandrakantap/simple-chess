@@ -26,12 +26,40 @@ public enum BoardCell {
         return column;
     }
 
-    private boolean isOnSameColumn(BoardCell cell){
-        return cell.getColumn()==this.getColumn();
+    public boolean isOnTopOf(BoardCell cell){
+        return cell.getColumn()==this.getColumn() && this.getRow() < cell.getRow();
     }
 
-    private boolean isOnSameRow(BoardCell cell){
-        return cell.getRow()==this.getRow();
+    public boolean isAtBottomOf(BoardCell cell){
+        return cell.getColumn()==this.getColumn() && this.getRow() > cell.getRow();
+    }
+
+    public boolean isOnLeftOf(BoardCell cell){
+        return cell.getRow()==this.getRow() && this.getColumn() < cell.getColumn();
+    }
+
+    public boolean isOnRightOf(BoardCell cell){
+        return cell.getRow()==this.getRow() && this.getColumn() > cell.getColumn();
+    }
+
+    public boolean isOnLeftTop(BoardCell cell){
+        return this.getColumn() < cell.getColumn() && this.getRow() < cell.getRow() && this.isDiagonal(cell);
+    }
+
+    public boolean isOnLeftBottom(BoardCell cell){
+        return this.getColumn() < cell.getColumn() && this.getRow() > cell.getRow() && this.isDiagonal(cell);
+    }
+
+    public boolean isOnRightTop(BoardCell cell){
+        return this.getColumn() > cell.getColumn() && this.getRow() < cell.getRow() && this.isDiagonal(cell);
+    }
+    public boolean isOnRightBottom(BoardCell cell){
+        return this.getColumn() > cell.getColumn() && this.getRow() > cell.getRow() && this.isDiagonal(cell);
+    }
+
+
+    private boolean isDiagonal(BoardCell cell){
+        return Math.abs(this.getColumn()-cell.getColumn()) == Math.abs(this.getRow()-cell.getRow());
     }
 
 }

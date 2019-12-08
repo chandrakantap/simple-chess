@@ -10,10 +10,15 @@ import org.springframework.stereotype.Component;
 public class PieceMoveValidator {
 
     private final PawnMoveValidator pawnMoveValidator;
+    private final RookMoveValidator rookMoveValidator;
+    private final BishopMoveValidator bishopMoveValidator;
 
     @Autowired
-    public PieceMoveValidator(PawnMoveValidator pawnMoveValidator) {
+    public PieceMoveValidator(PawnMoveValidator pawnMoveValidator, RookMoveValidator rookMoveValidator,
+                              BishopMoveValidator bishopMoveValidator) {
         this.pawnMoveValidator = pawnMoveValidator;
+        this.rookMoveValidator = rookMoveValidator;
+        this.bishopMoveValidator = bishopMoveValidator;
     }
 
     public MoveResult validateMove(final BoardCell fromCell, final BoardCell toCell, final Board board){
@@ -28,6 +33,13 @@ public class PieceMoveValidator {
                 return pawnMoveValidator.validateBlackPawnMove(fromCell,toCell,board);
             case WPAWN:
                 return pawnMoveValidator.validateWhitePawnMove(fromCell,toCell,board);
+            case WROOK:
+            case BROOK:
+                return rookMoveValidator.validate(fromCell,toCell,board);
+            case WBISHOP:
+            case BBISHOP:
+                return bishopMoveValidator.validate(fromCell,toCell,board);
+
         }
         return MoveResult.validMove();
     }

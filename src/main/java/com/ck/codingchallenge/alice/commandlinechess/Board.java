@@ -98,13 +98,6 @@ public class Board{
         return moveResult;
     }
 
-    private void switchPlayer() {
-        if(currentPlayer.equals(Player.BLACK)){
-            currentPlayer = Player.WHITE;
-        }else{
-            currentPlayer = Player.BLACK;
-        }
-    }
 
     public Player getCurrentPlayer() {
         return currentPlayer;
@@ -123,6 +116,118 @@ public class Board{
             return null;
         }
         return getCellPiece(boardCells[row][col]);
+    }
+
+    private void switchPlayer() {
+        if(currentPlayer.equals(Player.BLACK)){
+            currentPlayer = Player.WHITE;
+        }else{
+            currentPlayer = Player.BLACK;
+        }
+    }
+
+    public Piece getNearestTopPiece(BoardCell fromCell, BoardCell toCell){
+        final int col = fromCell.getColumn();
+        final int topRow = toCell==null?-1:toCell.getRow();
+
+        for(int row=fromCell.getRow()-1;row>topRow;row--){
+            final Piece piece = getCellPiece(row,col);
+            if(piece!=null){
+                return piece;
+            }
+        }
+        return null;
+    }
+
+    public Piece getNearestBottomPiece(BoardCell fromCell, BoardCell toCell){
+        final int col = fromCell.getColumn();
+        final int bottomRow = toCell==null?8:toCell.getRow();
+
+        for(int row=fromCell.getRow()+1;row<bottomRow;row++){
+            final Piece piece = getCellPiece(row,col);
+            if(piece!=null){
+                return piece;
+            }
+        }
+        return null;
+    }
+
+    public Piece getNearestLeftPiece(BoardCell fromCell, BoardCell toCell){
+        final int row = fromCell.getRow();
+        final int leftColumn = toCell==null?-1:toCell.getColumn();
+
+        for(int col=fromCell.getColumn()-1;col>leftColumn;col--){
+            final Piece piece = getCellPiece(row,col);
+            if(piece!=null){
+                return piece;
+            }
+        }
+        return null;
+    }
+
+    public Piece getNearestRightPiece(BoardCell fromCell, BoardCell toCell){
+        final int row = fromCell.getRow();
+        final int rightColumn = toCell==null?8:toCell.getColumn();
+
+        for(int col=fromCell.getColumn()+1;col>rightColumn;col++){
+            final Piece piece = getCellPiece(row,col);
+            if(piece!=null){
+                return piece;
+            }
+        }
+        return null;
+    }
+
+    public Piece getNearestRightTopPiece(BoardCell fromCell, BoardCell toCell){
+        int rightColumn = toCell==null?8:toCell.getColumn();
+        int topRow = toCell==null?-1:toCell.getRow();
+
+        for(int col=fromCell.getColumn()+1,row=fromCell.getRow()-1;col<rightColumn && row>topRow;col++,row--){
+            final Piece piece = getCellPiece(row,col);
+            if(piece!=null){
+                return piece;
+            }
+        }
+        return null;
+    }
+
+    public Piece getNearestLeftTopPiece(BoardCell fromCell, BoardCell toCell){
+        int leftColumn = toCell==null?-1:toCell.getColumn();
+        int topRow = toCell==null?-1:toCell.getRow();
+
+        for(int col=fromCell.getColumn()-1,row=fromCell.getRow()-1;col>leftColumn && row>topRow;col--,row--){
+            final Piece piece = getCellPiece(row,col);
+            if(piece!=null){
+                return piece;
+            }
+        }
+        return null;
+    }
+
+    public Piece getNearestLeftBottomPiece(BoardCell fromCell, BoardCell toCell){
+        int leftColumn = toCell==null?-1:toCell.getColumn();
+        int bottomRow = toCell==null?8:toCell.getRow();
+
+        for(int col=fromCell.getColumn()-1,row=fromCell.getRow()+1;col>leftColumn && row<bottomRow;col--,row++){
+            final Piece piece = getCellPiece(row,col);
+            if(piece!=null){
+                return piece;
+            }
+        }
+        return null;
+    }
+
+    public Piece getNearestRightBottomPiece(BoardCell fromCell, BoardCell toCell){
+        int rightColumn = toCell==null?8:toCell.getColumn();
+        int bottomRow = toCell==null?8:toCell.getRow();
+
+        for(int col=fromCell.getColumn()+1,row=fromCell.getRow()+1;col<rightColumn && row<bottomRow;col++,row++){
+            final Piece piece = getCellPiece(row,col);
+            if(piece!=null){
+                return piece;
+            }
+        }
+        return null;
     }
 
 }
