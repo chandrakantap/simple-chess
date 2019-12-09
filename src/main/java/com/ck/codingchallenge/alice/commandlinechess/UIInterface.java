@@ -16,6 +16,7 @@ public class UIInterface {
 
     public void drawBoard(){
         final Iterator<Piece> deadPieceIterator =  board.getDeadPieces().iterator();
+        final Iterator<String> recentMoveIterator = board.getRecentMoves().iterator();
 
 
         clearConsole();
@@ -23,14 +24,14 @@ public class UIInterface {
         System.out.println("");
         System.out.println("    a  b  c  d  e  f  g  h");
         System.out.println("  ╔════════════════════════╗    ╔═════════╗");
-        printRow(0,deadPieceIterator);
-        printRow(1,deadPieceIterator);
-        printRow(2,deadPieceIterator);
-        printRow(3,deadPieceIterator);
-        printRow(4,deadPieceIterator);
-        printRow(5,deadPieceIterator);
-        printRow(6,deadPieceIterator);
-        printRow(7,deadPieceIterator);
+        printRow(0,deadPieceIterator,recentMoveIterator);
+        printRow(1,deadPieceIterator,recentMoveIterator);
+        printRow(2,deadPieceIterator,recentMoveIterator);
+        printRow(3,deadPieceIterator,recentMoveIterator);
+        printRow(4,deadPieceIterator,recentMoveIterator);
+        printRow(5,deadPieceIterator,recentMoveIterator);
+        printRow(6,deadPieceIterator,recentMoveIterator);
+        printRow(7,deadPieceIterator,recentMoveIterator);
         System.out.println("  ╚════════════════════════╝    ╚═════════╝");
         System.out.println("    a  b  c  d  e  f  g  h");
         System.out.println("");
@@ -42,7 +43,7 @@ public class UIInterface {
         System.out.flush();
     }
 
-    private void printRow(int row,Iterator<Piece> deadPieceIterator){
+    private void printRow(int row,Iterator<Piece> deadPieceIterator,Iterator<String> recentMoveIterator){
         StringBuilder rowStringBuilder = new StringBuilder().append(8-row).append(" ║ ");
         for(int col=0;col<8;col++){
             Piece cellPiece = board.getCellPiece(row,col);
@@ -58,7 +59,10 @@ public class UIInterface {
         rowStringBuilder.append(deadPieceIterator.hasNext()?deadPieceIterator.next().getAsciiCode():" ").append(" ");
         rowStringBuilder.append(deadPieceIterator.hasNext()?deadPieceIterator.next().getAsciiCode():" ").append(" ");
         rowStringBuilder.append(deadPieceIterator.hasNext()?deadPieceIterator.next().getAsciiCode():" ").append(" ");
-        rowStringBuilder.append("║");
+        rowStringBuilder.append("║ ");
+        if(recentMoveIterator.hasNext()){
+            rowStringBuilder.append(recentMoveIterator.next());
+        }
         System.out.println(rowStringBuilder.toString());
     }
 }

@@ -5,10 +5,7 @@ import com.ck.codingchallenge.alice.commandlinechess.movevalidator.PieceMoveVali
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 @Component
@@ -25,7 +22,9 @@ public class Board{
     };
     private Map<BoardCell,Piece> piecePositions;
     private List<Piece> deadPieces;
+    private Queue<String> recentMoves;
     private Player currentPlayer;
+    private int moveNo;
 
     private final PieceMoveValidator moveValidator;
 
@@ -75,6 +74,8 @@ public class Board{
         piecePositions.put(BoardCell.H7,Piece.BPAWN);
 
         deadPieces=new ArrayList<>();
+        recentMoves=new LinkedList<>();
+        moveNo=1;
 
     }
 
@@ -100,6 +101,11 @@ public class Board{
             piecePositions.remove(fromCell);
 
             switchPlayer();
+            if(recentMoves.size() > 7){
+                recentMoves.poll();
+            }
+            recentMoves.add(moveNo+". "+fromCell.name()+" - "+toCell.name());
+            moveNo++;
         }
         return moveResult;
     }
@@ -117,7 +123,11 @@ public class Board{
         return deadPieces;
     }
 
-    public Piece getCellPiece(int row,int col){
+    public Queue<String> getRecentMoves() {
+        return recentMoves;
+    }
+
+    public Piece getCellPiece(int row, int col){
         if(row > 7 || col > 7){
             return null;
         }
